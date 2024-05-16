@@ -20,7 +20,7 @@ namespace RealEstate_Dapper_Api.Repositories.CategoryRepository
             var parameters = new DynamicParameters();
             parameters.Add("@categoryName", categoryDto.CategoryName);
             parameters.Add("@categoryStatus", true);
-            using(var connection =_context.CreateConnection())
+            using (var connection = _context.CreateConnection())
             {
                 await connection.ExecuteAsync(query, parameters);
             }
@@ -40,10 +40,22 @@ namespace RealEstate_Dapper_Api.Repositories.CategoryRepository
         public async Task<List<ResultCategoryDto>> GetAllCategoryAsync()
         {
             string query = "Select * From Category";
-            using(var connection = _context.CreateConnection())
+            using (var connection = _context.CreateConnection())
             {
-                var values= await connection.QueryAsync<ResultCategoryDto>(query);
+                var values = await connection.QueryAsync<ResultCategoryDto>(query);
                 return values.ToList();
+            }
+        }
+
+        public async Task<GetByIDCategoryDto> GetCategory(int id)
+        {
+            string query = "Select * from Category where CategoryID=@CategoryID";
+            var parameters = new DynamicParameters();
+            parameters.Add("@CategoryID", id);
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryFirstOrDefaultAsync<GetByIDCategoryDto>(query, parameters);
+                return values;
             }
         }
 
