@@ -15,12 +15,12 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
 
         public async void CreateProductAsync(CreateProductDto ProductDto)
         {
-            string query = "insert into Product (ProductTitle,ProductPrice,ProductCity,ProductDistrict) values (@ProductTitle,@ProductPrice,@ProductCity,@ProductDistrict)";
+            string query = "insert into Product (Title,Price,City,District) values (@Title,@Price,@City,@District)";
             var parameters = new DynamicParameters();
-            parameters.Add("@ProductTitle", ProductDto.Title);
-            parameters.Add("@ProductPrice", ProductDto.Price);
-            parameters.Add("@ProductCity", ProductDto.City);
-            parameters.Add("@ProductDistrict", ProductDto.District);
+            parameters.Add("@Title", ProductDto.Title);
+            parameters.Add("@Price", ProductDto.Price);
+            parameters.Add("@City", ProductDto.City);
+            parameters.Add("@District", ProductDto.District);
             using (var connection = _context.CreateConnection())
             {
                 await connection.ExecuteAsync(query, parameters);
@@ -50,7 +50,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
 
         public async Task<List<ResultProductWithCategoryDto>> GetAllProductWithCategoryAsync()
         {
-            string query = "Select ProductID,ProductTitle,ProductPrice,ProductCity,ProductDistrict,CategoryName From Product inner join Category on Product.ProductCategory=Category.CategoryID";
+            string query = "Select ProductID,Title,Price,City,District,CategoryName,CoverImage,Type,Address From Product inner join Category on Product.ProductCategory=Category.CategoryID";
             using (var connection = _context.CreateConnection())
             {
                 var values = await connection.QueryAsync<ResultProductWithCategoryDto>(query);
@@ -72,12 +72,12 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
 
         public async void UpdateProduct(UpdateProductDto ProductDto)
         {
-            string query = "Update Product Set ProductTitle=@ProductTitle,ProductPrice=@ProductPrice,ProductCity=@ProductCity,ProductDistrict=@ProductDistrict where ProductID=@ProductID";
+            string query = "Update Product Set Title=@Title,Price=@Price,City=@City,District=@District where ProductID=@ProductID";
             var parameters = new DynamicParameters();
-            parameters.Add("@ProductTitle", ProductDto.Title);
-            parameters.Add("@ProductPrice", ProductDto.Price);
-            parameters.Add("@ProductCity", ProductDto.City);
-            parameters.Add("@ProductDistrict", ProductDto.District);
+            parameters.Add("@Title", ProductDto.Title);
+            parameters.Add("@Price", ProductDto.Price);
+            parameters.Add("@City", ProductDto.City);
+            parameters.Add("@District", ProductDto.District);
             parameters.Add("@ProductID", ProductDto.ProductID);
             using (var connection = _context.CreateConnection())
             {
