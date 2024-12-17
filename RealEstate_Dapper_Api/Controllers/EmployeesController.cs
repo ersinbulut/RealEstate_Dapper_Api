@@ -16,7 +16,7 @@ namespace RealEstate_Dapper_Api.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        [HttpGet]
+        [HttpGet("EmployeeList")]
         public async Task<IActionResult> EmployeeList()
         {
             var values = await _employeeRepository.GetAllEmployeeAsync();
