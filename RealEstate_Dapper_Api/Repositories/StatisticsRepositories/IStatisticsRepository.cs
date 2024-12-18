@@ -8,14 +8,15 @@
         int ProductCount();
         int ApartmenCount();
         string EmployeeNameByMaxProductCount();
-        decimal AverageProductByRent();
-        decimal AverageProductBySale();
+        decimal AverageProductPriceByRent();
+        decimal AverageProductPriceBySale();
         string CityNameByMaxProductCount();
         int DifferentCityCount();
         decimal LastProductPrice();
         string NewestBuildingYear();
         string OldestBuildingYear();
         int ActiveEmployeeCount();
+        int AverageRoomCount();
 
     }
 }

@@ -13,7 +13,7 @@ namespace RealEstate_Dapper_Api.Repositories.StatisticsRepositories
         {
             _context = context;
         }
-
+        //aktif kategori sayısı
         public int ActiveCategoryCount()
         {
             string query = "Select Count(*) From Category where CategoryStatus=1";
@@ -23,7 +23,7 @@ namespace RealEstate_Dapper_Api.Repositories.StatisticsRepositories
                 return values;
             }
         }
-
+        //aktif personel sayısı
         public int ActiveEmployeeCount()
         {
             string query = "Select Count(*) From Employee where Status=1";
@@ -33,30 +33,65 @@ namespace RealEstate_Dapper_Api.Repositories.StatisticsRepositories
                 return values;
             }
         }
-
+        //daire sayısı
         public int ApartmenCount()
         {
-            throw new NotImplementedException();
+            string query = "Select Count(*) From Product where Title like '%Daire'";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = connection.QueryFirstOrDefault<int>(query);
+                return values;
+            }
         }
-
-        public decimal AverageProductByRent()
+        //satılıkların ortalama fiyatı
+        public decimal AverageProductPriceByRent()
         {
-            throw new NotImplementedException();
+            string query = "Select Avg(Price) From Product where Type='Kiralık'";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = connection.QueryFirstOrDefault<decimal>(query);
+                return values;
+            }
         }
-
-        public decimal AverageProductBySale()
+        //kiralıkların ortalama fiyatı
+        public decimal AverageProductPriceBySale()
         {
-            throw new NotImplementedException();
+            string query = "Select Avg(Price) From Product where Type='Satılık'";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = connection.QueryFirstOrDefault<decimal>(query);
+                return values;
+            }
         }
-
+        //ortalama oda sayısı
+        public int AverageRoomCount()
+        {
+            string query = "Select Avg(RoomCount) From ProductDetails";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = connection.QueryFirstOrDefault<int>(query);
+                return values;
+            }
+        }
+        //kategori sayısı
         public int CategoryCount()
         {
-            throw new NotImplementedException();
+            string query = "Select Count(*) From Category";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = connection.QueryFirstOrDefault<int>(query);
+                return values;
+            }
         }
-
+        //ŞehirAdıMaksimumÜrünSayısına Göre
         public string CityNameByMaxProductCount()
         {
-            throw new NotImplementedException();
+            string query = "Select CategoryName,Count(*) From Product inner join Category On Product.ProductCategory=Category.CategoryID Group By CategoryName order by Count(*) Desc";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = connection.QueryFirstOrDefault<string>(query);
+                return values;
+            }
         }
 
         public int DifferentCityCount()
