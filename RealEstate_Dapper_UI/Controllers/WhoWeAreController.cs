@@ -1,44 +1,44 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RealEstate_Dapper_UI.Dtos.EmployeeDtos;
-using System.Text;
+using RealEstate_Dapper_UI.Dtos.WhoWeAreDtos;
 
 namespace RealEstate_Dapper_UI.Controllers
 {
-    public class EmployeeController : Controller
+    public class WhoWeAreController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public EmployeeController(IHttpClientFactory httpClientFactory)
+        public WhoWeAreController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responsiveMessage = await client.GetAsync("https://localhost:7285/api/Employees/EmployeeList");
+            var responsiveMessage = await client.GetAsync("https://localhost:7285/api/WhoWeAreDetail");
             if (responsiveMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responsiveMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultEmployeeDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultWhoWeAreDetailDto>>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpGet]
-        public IActionResult CreateEmployee()
+        public IActionResult CreateWhoWeAreDetail()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateEmployee(CreateEmployeeDto createEmployeeDto)
+        public async Task<IActionResult> CreateWhoWeAreDetail(CreateWhoWeAreDetailDto createWhoWeAreDetailDto)
         {
             var client = _httpClientFactory.CreateClient();
-            createEmployeeDto.Status = true;
-            var jsonData = JsonConvert.SerializeObject(createEmployeeDto);
+            var jsonData = JsonConvert.SerializeObject(createWhoWeAreDetailDto);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7285/api/Employees", content);
+            var responseMessage = await client.PostAsync("https://localhost:7285/api/WhoWeAreDetail", content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -46,10 +46,10 @@ namespace RealEstate_Dapper_UI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> DeleteEmployee(int id)
+        public async Task<IActionResult> DeleteWhoWeAreDetail(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7285/api/Employees/{id}");
+            var responseMessage = await client.DeleteAsync($"https://localhost:7285/api/WhoWeAreDetail/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -58,7 +58,7 @@ namespace RealEstate_Dapper_UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> UpdateEmployee(int id)
+        public async Task<IActionResult> UpdateWhoWeAreDetail(int id)
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"https://localhost:7285/api/Employees/{id}");
@@ -71,7 +71,7 @@ namespace RealEstate_Dapper_UI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateEmployee(UpdateEmployeeDto updateEmployeeDto)
+        public async Task<IActionResult> UpdateWhoWeAreDetail(UpdateEmployeeDto updateEmployeeDto)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateEmployeeDto);
@@ -85,3 +85,4 @@ namespace RealEstate_Dapper_UI.Controllers
         }
     }
 }
+
