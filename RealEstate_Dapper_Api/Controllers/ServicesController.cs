@@ -29,7 +29,7 @@ namespace RealEstate_Dapper_Api.Controllers
             _serviceRepository.CreateService(createServiceDto);
             return Ok("Kategori Başarılı Bir Şekilde Eklendi");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteService(int id)
         {
             _serviceRepository.DeleteService(id);
