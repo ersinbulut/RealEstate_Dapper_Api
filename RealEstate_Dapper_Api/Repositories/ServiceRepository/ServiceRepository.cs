@@ -48,7 +48,7 @@ namespace RealEstate_Dapper_Api.Repositories.ServiceRepository
 
         public async Task<GetByIDServiceDto> GetService(int id)
         {
-            string query = "Select * from Service where ServiceD=@serviceID";
+            string query = "Select * from Service where ServiceID=@serviceID";
             var parameters = new DynamicParameters();
             parameters.Add("@serviceID", id);
             using (var connection = _context.CreateConnection())
@@ -62,6 +62,7 @@ namespace RealEstate_Dapper_Api.Repositories.ServiceRepository
         {
             string query = "Update Service Set ServiceName=@serviceName,ServiceStatus=@serviceStatus where ServiceID=@serviceID";
             var parameters = new DynamicParameters();
+            parameters.Add("@serviceID", ServiceDto.ServiceID);
             parameters.Add("@serviceName", ServiceDto.ServiceName);
             parameters.Add("@serviceStatus", ServiceDto.ServiceStatus);
             using (var connection = _context.CreateConnection())
