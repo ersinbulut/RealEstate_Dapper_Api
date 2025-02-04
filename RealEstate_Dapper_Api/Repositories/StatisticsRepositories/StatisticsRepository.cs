@@ -108,23 +108,32 @@ namespace RealEstate_Dapper_Api.Repositories.StatisticsRepositories
 
         public int DifferentCityCount()
         {
-            string query = "Select Count(Distinc(City)) From Product";
+            string query = "SELECT COUNT(DISTINCT City) FROM Product";
+
             using (var connection = _context.CreateConnection())
             {
-                var values = connection.QueryFirstOrDefault<int>(query);
-                return values;
+                var value = connection.QueryFirstOrDefault<int>(query);
+                return value;
             }
         }
 
+
         public string EmployeeNameByMaxProductCount()
         {
-            string query = "Select Name, Count() 'product_count' From Product Inner Join Employee On Product.EmployeeID = Employee.EmployeeID Group By Name Order By product_count Desc";
+            string query = @"
+        SELECT TOP 1 Employee.Name
+        FROM Product 
+        INNER JOIN Employee ON Product.EmployeeID = Employee.EmployeeID 
+        GROUP BY Employee.Name 
+        ORDER BY COUNT(Product.ProductID) DESC";
+
             using (var connection = _context.CreateConnection())
             {
-                var values = connection.QueryFirstOrDefault<string>(query);
-                return values;
+                var value = connection.QueryFirstOrDefault<string>(query);
+                return value ?? "No employees found";
             }
         }
+
 
         public decimal LastProductPrice()
         {
