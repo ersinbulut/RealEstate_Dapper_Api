@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RealEstate_Dapper_UI.Dtos.LoginDtos.CreateLoginDto
+@{
 	Layout = null;
 }
 
@@ -57,11 +58,11 @@
 						</div>
 						<form method="post">
 							<div class="form-floating mb-3">
-								<input type="email" class="form-control" id="floatingInput" placeholder="Kullanıcı Adınızı yazınız">
+								<input type="text" class="form-control" asp-for="Username" id="floatingInput" placeholder="Kullanıcı Adınızı yazınız">
 								<label for="floatingInput">Kullanıcı Adınız</label>
 							</div>
 							<div class="form-floating mb-4">
-								<input type="password" class="form-control" id="floatingPassword" placeholder="Şifreniz">
+								<input type="password" class="form-control" asp-for="Password" id="floatingPassword" placeholder="Şifreniz">
 								<label for="floatingPassword">Şifre</label>
 							</div>
 							<div class="d-flex align-items-center justify-content-between mb-4">

@@ -1,8 +1,22 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddHttpClient();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme,opt =>
+{
+    opt.LoginPath = "/Login/Index/";
+    opt.LogoutPath = "/Login/LogOut/";
+    opt.AccessDeniedPath = "/Pages/AccessDenied/";
+    opt.Cookie.HttpOnly = true;
+    opt.Cookie.SameSite=SameSiteMode.Strict;
+    opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    opt.Cookie.Name = "RealEstateJwt";
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -14,6 +28,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseAuthentication();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
