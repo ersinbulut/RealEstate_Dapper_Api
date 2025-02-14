@@ -1,0 +1,58 @@
+﻿@model List<ResultEstateAgentDashboardChartDto>
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chart-container">
+        <canvas id="myChart" style="max-width: 800px"></canvas>
+    </div>
+
+    <script>
+        // Modelden gelen verileri al
+        var xValues = @Html.Raw(Json.Serialize(Model.Select(item => item.City)));
+        var yValues = @Html.Raw(Json.Serialize(Model.Select(item => item.CityCount)));
+        var barColors = ["rgb(106, 212, 221)", "rgb(127, 199, 217)", "rgb(54, 84, 134)", "rgb(134, 182, 246)", "rgb(0, 141, 218)"];
+
+        // Konsolda veri kontrolü yap
+        console.log("Şehirler:", xValues);
+        console.log("Şehir Sayıları:", yValues);
+
+        // Grafik oluştur
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Şehir - İlan İstatistiği"
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
