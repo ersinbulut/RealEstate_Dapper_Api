@@ -1,6 +1,6 @@
-﻿namespace RealEstate_Dapper_Api.Dtos.MessageDtos
+﻿namespace RealEstate_Dapper_UI.Dtos.MessageDtos
 {
-    public class ResultInboxMessageDto
+    public class ResultInBoxMessageDto
     {
         public int MessageID { get; set; }
         public string Name { get; set; }
