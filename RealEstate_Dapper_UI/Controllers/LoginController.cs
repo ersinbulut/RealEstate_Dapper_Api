@@ -52,7 +52,9 @@ namespace RealEstate_Dapper_UI.Controllers
                             IsPersistent = true
                         };
                         await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),authProps);
-                        return RedirectToAction("Index", "Dashboard", new { area = "EstateAgent" });
+                        //return RedirectToAction("Index", "Dashboard", new { area = "EstateAgent" });
+                        return Redirect("https://localhost:7272/EstateAgent/Dashboard/Index");
+
                     }
                 }
             }
