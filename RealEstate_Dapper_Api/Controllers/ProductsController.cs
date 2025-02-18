@@ -47,20 +47,20 @@ namespace RealEstate_Dapper_Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
         {
-            _productRepository.CreateProductAsync(createProductDto);
-            return Ok("Kategori Başarılı Bir Şekilde Eklendi");
+            _productRepository.CreateProduct(createProductDto);
+            return Ok("İlan Başarılı Bir Şekilde Eklendi");
         }
         [HttpDelete]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             _productRepository.DeleteProduct(id);
-            return Ok("Kategori Başarılı Bir Şekilde Silindi");
+            return Ok("İlan Başarılı Bir Şekilde Silindi");
         }
         [HttpPut]
         public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
         {
             _productRepository.UpdateProduct(updateProductDto);
-            return Ok("Kategori Başarılı Bir Şekilde Güncellendi");
+            return Ok("İlan Başarılı Bir Şekilde Güncellendi");
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
