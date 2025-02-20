@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RealEstate_Dapper_UI.Dtos.ProductDetailDtos;
 using RealEstate_Dapper_UI.Dtos.ProductDtos;
 
 namespace RealEstate_Dapper_UI.Controllers
@@ -29,7 +30,28 @@ namespace RealEstate_Dapper_UI.Controllers
         [HttpGet]
         public async Task<IActionResult> PropertySingle(int id)
         {
-            return View();
+            id = 1;
+            var client = _httpClientFactory.CreateClient();
+            var responsiveMessage = await client.GetAsync("https://localhost:7285/api/Products/GetProductByProductId?id=" + id);
+            var jsonData = await responsiveMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<ResultProductDtos>(jsonData);
+
+            var responsiveMessage2 = await client.GetAsync("https://localhost:7285/api/ProductDetails/GetProductDetailByProductID?id=" + id);
+            var jsonData2 = await responsiveMessage2.Content.ReadAsStringAsync();
+            var values2 = JsonConvert.DeserializeObject<GetProductDetailByIdDto>(jsonData2);
+
+            ViewBag.title1 = values.title.ToString();
+            ViewBag.price = values.price.ToString();
+            ViewBag.city = values.city.ToString();
+            ViewBag.district = values.district.ToString();
+            ViewBag.address = values.address.ToString();
+            ViewBag.type = values.type.ToString();
+            ViewBag.datediff = values.address.ToString();
+
+            ViewBag.bathCount = values2.bathCount;
+
+            return View(values);
+
         }
     }
 }
