@@ -40,17 +40,23 @@ namespace RealEstate_Dapper_UI.Controllers
             var jsonData2 = await responsiveMessage2.Content.ReadAsStringAsync();
             var values2 = JsonConvert.DeserializeObject<GetProductDetailByIdDto>(jsonData2);
 
+            ViewBag.productId = values.productID.ToString();
             ViewBag.title1 = values.title.ToString();
             ViewBag.price = values.price.ToString();
             ViewBag.city = values.city.ToString();
             ViewBag.district = values.district.ToString();
             ViewBag.address = values.address.ToString();
             ViewBag.type = values.type.ToString();
+            ViewBag.description = values.description;
             ViewBag.datediff = values.address.ToString();
 
             ViewBag.bathCount = values2.bathCount;
             ViewBag.bedCount = values2.bedRoomCount;
             ViewBag.size = values2.productSize;
+            ViewBag.roomCount = values2.roomCount;
+            ViewBag.garageCount = values2.garageSize;
+            ViewBag.buildYear = values2.buildYear;
+            ViewBag.date = values.AdvertisementDate;
 
             DateTime date1=DateTime.Now;
             DateTime date2 = values.AdvertisementDate;
