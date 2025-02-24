@@ -9,6 +9,7 @@
         public string Type { get; set; }
         public string CoverImage { get; set; }
         public string District { get; set; }
+        public string SlugUrl { get; set; }
         public int ProductCategory { get; set; }
     }
 }
