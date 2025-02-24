@@ -38,7 +38,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             }
         }
 
-        public async void DeleteProduct(int id)
+        public async Task DeleteProduct(int id)
         {
             string query = "Delete From Product Where ProductID=@produtID";
             var parameters = new DynamicParameters();
@@ -109,9 +109,9 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             CategoryName, CoverImage, Type, Address, DealOfTheDay 
             FROM Product 
             INNER JOIN Category ON Product.ProductCategory = Category.CategoryID 
-            WHERE EmployeeID = @employeeId and ProductStatus=0";
+            WHERE AppUserID = @appuserId and ProductStatus=0";
             var parameters = new DynamicParameters();
-            parameters.Add("@employeeId", id);
+            parameters.Add("@appuserId", id);
             using (var connection = _context.CreateConnection()) // Bağlantıyı oluştur
             {
                 var values = await connection.QueryAsync<ResultProductAdvertListWithCategoryByEmployeeDto>(query, parameters);
@@ -126,9 +126,9 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             CategoryName, CoverImage, Type, Address, DealOfTheDay 
             FROM Product 
             INNER JOIN Category ON Product.ProductCategory = Category.CategoryID 
-            WHERE EmployeeID = @employeeId and ProductStatus=1";
+            WHERE AppUserID = @appuserId and ProductStatus=1";
             var parameters = new DynamicParameters();
-            parameters.Add("@employeeId", id);
+            parameters.Add("@appuserId", id);
             using (var connection = _context.CreateConnection()) // Bağlantıyı oluştur
             {
                 var values = await connection.QueryAsync<ResultProductAdvertListWithCategoryByEmployeeDto>(query, parameters);
@@ -206,7 +206,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             }
         }
 
-        public async void UpdateProduct(UpdateProductDto ProductDto)
+        public async Task UpdateProduct(UpdateProductDto ProductDto)
         {
             string query = "Update Product Set Title=@Title,Price=@Price,City=@City,District=@District where ProductID=@ProductID";
             var parameters = new DynamicParameters();

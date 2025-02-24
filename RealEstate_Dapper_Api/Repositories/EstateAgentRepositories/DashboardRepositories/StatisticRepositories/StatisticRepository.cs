@@ -23,9 +23,9 @@ namespace RealEstate_Dapper_Api.Repositories.EstateAgentRepositories.DashboardRe
 
         public int ProductCountByEmployeeId(int id)
         {
-            string query = "Select Count(*) From Product Where EmployeeID=@employeeId";
+            string query = "Select Count(*) From Product Where AppUserID=@appuserID";
             var parameters = new DynamicParameters();
-            parameters.Add("@employeeId", id);
+            parameters.Add("@appuserID", id);
             using (var connection = _context.CreateConnection())
             {
                 var values = connection.QueryFirstOrDefault<int>(query,parameters);
@@ -35,9 +35,9 @@ namespace RealEstate_Dapper_Api.Repositories.EstateAgentRepositories.DashboardRe
 
         public int ProductCountByStatusFalse(int id)
         {
-            string query = "Select Count(*) From Product Where EmployeeID=@employeeId And ProductStatus=0";
+            string query = "Select Count(*) From Product Where AppUserID=@appuserID And ProductStatus=0";
             var parameters = new DynamicParameters();
-            parameters.Add("@employeeId", id);
+            parameters.Add("@appuserID", id);
             using (var connection = _context.CreateConnection())
             {
                 var values = connection.QueryFirstOrDefault<int>(query, parameters);
@@ -47,9 +47,9 @@ namespace RealEstate_Dapper_Api.Repositories.EstateAgentRepositories.DashboardRe
 
         public int ProductCountByStatusTrue(int id)
         {
-            string query = "Select Count(*) From Product Where EmployeeID=@employeeId And ProductStatus=1";
+            string query = "Select Count(*) From Product Where AppUserID=@appuserID And ProductStatus=1";
             var parameters = new DynamicParameters();
-            parameters.Add("@employeeId", id);
+            parameters.Add("@appuserID", id);
             using (var connection = _context.CreateConnection())
             {
                 var values = connection.QueryFirstOrDefault<int>(query, parameters);
