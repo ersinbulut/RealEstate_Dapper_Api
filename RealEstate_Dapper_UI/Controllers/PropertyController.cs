@@ -46,7 +46,7 @@ namespace RealEstate_Dapper_UI.Controllers
         [HttpGet]
         public async Task<IActionResult> PropertySingle(int id)
         {
-            id = 1;
+            ViewBag.i = id;
             var client = _httpClientFactory.CreateClient();
             var responsiveMessage = await client.GetAsync("https://localhost:7285/api/Products/GetProductByProductId?id=" + id);
             var jsonData = await responsiveMessage.Content.ReadAsStringAsync();
