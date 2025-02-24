@@ -1,52 +1,51 @@
-SQL TABLO OLUŞTURMA 
+Proje Genel Bakış
 ------------------------
-use DbDapperRealEstate
-Create Table Category
-(
-CategoryID int primary key identity(1,1),
-CategoryName Nvarchar(50),
-CategoryStatus bit
-)
-Create Table Product
-(
-ProductID int primary key identity(1,1),
-ProductTitle Nvarchar(100),
-ProductPrice decimal(18,2),
-ProductCoverImage Nvarchar(250),
-ProductCity Nvarchar(100),
-ProductDistrict Nvarchar(500),
-ProductAddress Nvarchar(500),
-ProductDescription Nvarchar(Max),
-ProductCategory int
-)
-Create Table ProductDetails
-(
-ProductDetailID int primary key identity(1,1),
-ProductSize int,
-BedRoomCount tinyint,
-BathCount tinyint,
-RoomCount tinyint,
-GarageSize tinyint,
-BuildYear Char(4),
-Price Decimal(18,2),
-Location Nvarchar(500),
-VideoUrl Nvarchar(500),
-ProductID int,
-)
-Create Table Client
-(
-ClientID int primary key identity(1,1),
-Name Nvarchar(100),
-Title Nvarchar(100),
-Comment Nvarchar(2000)
-)
-Create Table Employee
-(
-EmployeeID int primary key identity(1,1),
-Name Nvarchar(100),
-Title Nvarchar(100),
-Mail Nvarchar(100),
-PhoneNumber Nvarchar(11),
-ImageUrl Nvarchar(100),
-Status bit
-)
+"RealEstate_Dapper_Api" projesi, modern ve performans odaklı bir emlakçı sitesi geliştirmeyi amaçlayan kapsamlı bir web uygulamasıdır. Bu projede kullanıcılar, istedikleri lokasyona göre uygun daireleri listeleyerek kiralama veya satın alma işlemleri için detaylı bilgi edinebilirler. Proje, hem backend hem de frontend bileşenlerini içeren modüler bir yapı sunarak esnek, genişletilebilir ve kullanıcı dostu bir deneyim sağlar.
+
+Kullanılan Teknolojiler
+------------------------
+Backend
+------------------------
+ASP.NET Core & C#: Sunucu tarafı geliştirmeleri için güçlü ve modern ASP.NET Core framework’ü, C# diliyle hayata geçirilmiştir.
+Dapper: Veritabanı işlemlerinde yüksek performans ve düşük kaynak tüketimi sağlamak amacıyla mikro ORM olarak Dapper kullanılmıştır. Bu sayede SQL sorguları doğrudan yazılarak hızlı veri erişimi mümkün hale gelir.
+RESTful API: CRUD (Create, Read, Update, Delete) işlemleri için RESTful mimari prensipleri benimsenmiş, esnek ve farklı istemci uygulamalarla entegrasyonu kolaylaştırılmıştır.
+Veritabanı: Genellikle MSSQL gibi ilişkisel veritabanları tercih edilerek, emlak ilanlarının ve kullanıcı verilerinin güvenli ve tutarlı bir şekilde yönetimi sağlanır.
+Frontend
+------------------------
+HTML, CSS, JavaScript, SCSS: Kullanıcı arayüzü, modern web standartlarına uygun olarak HTML, CSS, JavaScript ve SCSS teknolojileri kullanılarak geliştirilmiştir.
+Responsive Tasarım: Farklı ekran boyutlarına uyumlu, mobil ve masaüstü cihazlarda optimum kullanıcı deneyimi sunan, duyarlı (responsive) tasarım prensipleri uygulanmıştır.
+Öne Çıkan Özellikler
+
+Hızlı ve Verimli Veri İşlemleri: Dapper ile gerçekleştirilen veritabanı sorguları sayesinde, uygulama yüksek performans ve düşük gecikme süresiyle çalışır.
+Kullanıcı Dostu Arayüz: Temiz, modern ve responsive tasarım sayesinde, kullanıcılar aradıkları emlak ilanlarına hızlı ve kolay erişim sağlayabilir.
+Esnek RESTful API: API yapısı, farklı platformlardan (web, mobil vb.) erişime uygun olarak tasarlanmış olup, entegrasyon ve ölçeklenebilirlik açısından avantaj sağlar.
+Modüler Mimari: Backend ve frontend’in ayrı projeler olarak ele alınması, kodun okunabilirliğini ve bakımını kolaylaştırırken, yeni özelliklerin eklenmesine de imkan tanır.
+Lokasyon ve Kategori Bazlı Filtreleme: Kullanıcılar, ilanın lokasyonu, fiyat aralığı ve mülk tipine göre filtreleme yaparak aradıkları kriterlere uygun ilanlara ulaşabilir.
+Teknik Özellikler
+------------------------
+Performans Odaklı: Dapper kullanımı sayesinde, veritabanı sorgularında maksimum verimlilik ve düşük kaynak tüketimi hedeflenmiştir.
+Katmanlı Mimari: Controller, servis ve repository gibi katmanlara ayrılmış yapı, kodun modüler ve sürdürülebilir olmasını sağlar.
+Güvenlik: API endpoint’leri üzerinde gerekli güvenlik önlemleri alınmış, kullanıcı verilerinin korunması için modern güvenlik standartları uygulanmıştır.
+Kolay Genişletilebilirlik: Proje, yeni özelliklerin eklenmesine uygun esnek bir yapı sunar. Dependency Injection ve Repository Pattern gibi modern yazılım geliştirme teknikleri kullanılarak kod kalitesi artırılmıştır.
+Proje Yapısı
+------------------------
+RealEstate_Dapper_Api:
+Backend tarafını oluşturur. API endpoint’leri, veritabanı işlemleri ve iş mantığının yönetimi bu katmanda yer alır. Dapper’ın performans avantajlarından yararlanılarak, CRUD işlemleri ve hızlı veri erişimi sağlanır.
+
+RealEstate_Dapper_UI:
+Frontend kısmını temsil eder. HTML, CSS, JavaScript ve SCSS ile geliştirilmiş olan kullanıcı arayüzü, ziyaretçilere modern ve etkileşimli bir deneyim sunar.
+
+Bu proje, emlak sektöründe kullanılabilecek gerçek dünya senaryolarına yönelik, performans, güvenlik ve kullanıcı deneyimini ön planda tutan bir çözüm sunar. Hem geliştiriciler hem de kullanıcılar için ölçeklenebilir ve sürdürülebilir bir yapı oluşturmayı hedefleyen proje, modern teknolojiler ve en iyi yazılım geliştirme teknikleri kullanılarak hayata geçirilmiştir.
+
+![image](https://github.com/user-attachments/assets/9ba69aaa-1c00-4408-b8ed-4889382fcf61)
+![image](https://github.com/user-attachments/assets/2199eb10-be12-4dbf-8f12-69cb455cfe0a)
+![image](https://github.com/user-attachments/assets/e673eabb-df54-48da-9dab-d18dd20b8317)
+![image](https://github.com/user-attachments/assets/bd9751e4-0a6d-4221-9168-3cc6c0cc794a)
+
+Emlakçı paneli
+--------
+![image](https://github.com/user-attachments/assets/0674466b-8fa4-4801-901b-59811aaae28b)
+![image](https://github.com/user-attachments/assets/82bc7cb1-1584-4f62-ab26-c91f9791d798)
+![image](https://github.com/user-attachments/assets/203fcb99-4fa4-42eb-942d-f3ef447fad3b)
+
+
