@@ -42,5 +42,10 @@ Bu proje, emlak sektöründe kullanılabilecek gerçek dünya senaryolarına yö
 ![image](https://github.com/user-attachments/assets/e673eabb-df54-48da-9dab-d18dd20b8317)
 ![image](https://github.com/user-attachments/assets/bd9751e4-0a6d-4221-9168-3cc6c0cc794a)
 
+Emlakçı paneli
+--------
+![image](https://github.com/user-attachments/assets/0674466b-8fa4-4801-901b-59811aaae28b)
+![image](https://github.com/user-attachments/assets/82bc7cb1-1584-4f62-ab26-c91f9791d798)
+![image](https://github.com/user-attachments/assets/203fcb99-4fa4-42eb-942d-f3ef447fad3b)
 
 
